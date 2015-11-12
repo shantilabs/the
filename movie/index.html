@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ой, цветёт калина</title>
+    <script>
+        var clip = [
+            "aUBOHmAWVQI",
+            "fr--e8B5K2w",
+            "0ZOjUhJNGAI",
+            "tPZsj4XSJQo",
+            "78GV1pC-4dY",
+            "Bxzq0pjbG8U",
+            "_EQ4S_-ujJ0",
+            "69fD_zynaTA",
+            "zrQMCPDA-W0",
+            "9VCnBbW37Yo",
+            "mmhAYAZW2mg",
+            "z5Eb--s5o_s",
+            "7ljcyeu5gsQ",
+            "0Tw6YXve01E",
+            "By6l2gzCdOY",
+            "VaPt_i4OrAA",
+            "_2EHS-NrQcw",
+            "ovgxHytXKF0"
+        ],
+        template = '<iframe id="video{id}" src="https://www.youtube.com/embed/' +
+                   '{id}?iv_load_policy=3&enablejsapi=1&rel=0&autoplay=1&' +
+                   'wmode=opaque&version=3" frameborder="0" allowfullscreen ' +
+                   'width="300" height="220" ></iframe>';
+    function choice(seq) {
+        return seq[Math.round(Math.random() * (seq.length - 1))];
+    }
+    </script>
+    <style>
+        body {
+            background: #fff;
+            color: #000;
+            font-family: monospace;
+            text-align: center;
+        }
+        .tag {
+            font-size: 100px;
+            display: block;
+        }
+        iframe {
+            border: solid 10px #444;
+        }
+        a {
+            text-decoration: none;
+            color: #444;
+        }
+        a:hover {
+            color: #ff711d;
+        }
+    </style>
+</head>
+<body>
+<a class="tag" href="/">&lt;от сих&gt;</a>
+<script>document.write(template.replace(/\{id\}/g, choice(clip)))</script>
+<a class="tag" href="/">&lt;до сих&gt;</a>
+</body>
+</html>
