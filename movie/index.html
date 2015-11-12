@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Ой, цветёт калина</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
-        var clip = [
+        var clips = [
             "aUBOHmAWVQI",
             "fr--e8B5K2w",
             "0ZOjUhJNGAI",
@@ -24,13 +25,37 @@
             "_2EHS-NrQcw",
             "ovgxHytXKF0"
         ],
-        template = '<iframe id="video{id}" src="https://www.youtube.com/embed/' +
-                   '{id}?iv_load_policy=3&enablejsapi=1&rel=0&autoplay=1&' +
-                   'wmode=opaque&version=3" frameborder="0" allowfullscreen ' +
-                   'width="300" height="220" ></iframe>';
+        // https://developers.google.com/youtube/player_parameters
+        template = '<iframe ' +
+                'id="video{id}" ' +
+                'src="https://www.youtube.com/embed/{id}?' +
+                    'playlist={id}&' +
+                    'loop=1&' +
+                    'rel=0&' +
+                    'showinfo=0&' +
+                    'controls=0&' +
+                    'modestbranding=0&' +
+                    'autoplay=1&' +
+                    'wmode=opaque&' +
+                    'version=3" ' +
+                'frameborder="0" ' +
+                'allowfullscreen ' +
+                'width="300" ' +
+                'height="220"></iframe>';
     function choice(seq) {
         return seq[Math.round(Math.random() * (seq.length - 1))];
     }
+    function randomClip() {
+        return template.replace(/\{id\}/g, choice(clips));
+    }
+    function changeAnyClip() {
+        choice($('.video')).innerHTML = randomClip();
+    }
+    function loadAllClips() {
+        $('.video').each(function(i, el) { el.innerHTML = randomClip(); });
+    }
+    $(loadAllClips);
+    window.setInterval(changeAnyClip, 5000)
     </script>
     <style>
         body {
@@ -43,8 +68,10 @@
             font-size: 100px;
             display: block;
         }
-        iframe {
+        .video iframe {
             border: solid 10px #444;
+            width: 300px;
+            height: 220px;
         }
         a {
             text-decoration: none;
@@ -57,7 +84,11 @@
 </head>
 <body>
 <a class="tag" href="/">&lt;от сих&gt;</a>
-<script>document.write(template.replace(/\{id\}/g, choice(clip)))</script>
+<div>
+    <span class="video"></span>
+    <span class="video"></span>
+    <span class="video"></span>
+</div>
 <a class="tag" href="/">&lt;до сих&gt;</a>
 </body>
 </html>
