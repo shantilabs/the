@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Крутится-вертится</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="../the.js"></script>
     <script>
         var usedClips = [
              "fr--e8B5K2w"
@@ -54,19 +55,6 @@
                 'allowfullscreen ' +
                 'width="300" ' +
                 'height="220"></iframe>';
-    function choice(seq) {
-        return seq[Math.round(Math.random() * (seq.length - 1))];
-    }
-    function shuffle(seq) {
-        var counter = seq.length, temp, index;
-        while (counter > 0) {
-            index = Math.floor(Math.random() * counter);
-            counter--;
-            temp = seq[counter];
-            seq[counter] = seq[index];
-            seq[index] = temp;
-        }
-    }
     function randomClip() {
         if (clips.length == 0) {
             clips = usedClips;
@@ -77,14 +65,12 @@
         usedClips.push(clip);
         return template.replace(/\{id\}/g, choice(clips));
     }
-    function changeAnyClip() {
-        choice($('.video')).innerHTML = randomClip();
-    }
-    function loadAllClips() {
+    $(function() {
         $('.video').html(randomClip());
-    }
-    $(loadAllClips);
-    window.setInterval(changeAnyClip, 5000)
+    });
+    window.setInterval(function() {
+        choice($('.video')).innerHTML = randomClip();
+    }, 5000)
     </script>
     <style>
         body {
