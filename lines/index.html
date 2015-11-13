@@ -1,0 +1,90 @@
+<!DOCTYPE html><!-- друг, заходи на https://github.com/shantilabs/the -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тыщ-тыдыщ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        function HSVtoRGB(h, s, v) {
+            var r, g, b, i, f, p, q, t;
+            if (arguments.length === 1) {
+                s = h.s, v = h.v, h = h.h;
+            }
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: r = v, g = t, b = p; break;
+                case 1: r = q, g = v, b = p; break;
+                case 2: r = p, g = v, b = t; break;
+                case 3: r = p, g = q, b = v; break;
+                case 4: r = t, g = p, b = v; break;
+                case 5: r = v, g = p, b = q; break;
+            }
+            return {
+                r: Math.round(r * 255),
+                g: Math.round(g * 255),
+                b: Math.round(b * 255)
+            };
+        }
+        var currentColor = {
+            h: Math.random(),
+            s: 0.5,
+            v: 0.8
+        };
+        window.setInterval(function() {
+            currentColor.s += .001;
+            if (currentColor.s > 1) {
+                currentColor.s = .5;
+            }
+        }, 10);
+        $(function () {
+            $('.row a').on('mouseover', function() {
+                currentColor.h += .0007;
+                if (currentColor.h > 1) {
+                    currentColor.h = 0;
+                }
+                var rgb = HSVtoRGB(currentColor);
+                $(this).css({backgroundColor: 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')' });
+            });
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        #box {
+            width: 100%;
+        }
+        .row {
+            white-space:nowrap;
+        }
+        .row a {
+            display: inline-block;
+            height: 25px;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            width: 25px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <script>
+        for (var i = 0; i < 100; i++) {
+            document.write('<div class="row">');
+            for (var j = 0; j < 100; j++) {
+                document.write('<a href="/"> </a>');
+            }
+            document.write('</div>');
+        }
+    </script>
+</div>
+</body>
+</html>
